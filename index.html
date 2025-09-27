@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Location Tracker</title>
+    <link rel="stylesheet" href="location.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛰️ Live Location Tracker</h1>
+            <div class="status" id="status">Set CanSat location to start tracking</div>
+        </header>
+
+        <div class="main-content">
+            <div class="canvas-container">
+                <div class="canvas-header">
+                    <h2 class="canvas-title">Live Location Grid</h2>
+                    <div class="tracking-indicator">
+                        <div class="tracking-dot" id="trackingDot"></div>
+                        <span id="trackingStatus">Stopped</span>
+                    </div>
+                </div>
+                <canvas id="locationCanvas" width="600" height="600"></canvas>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-marker current-location"></div>
+                        <span>You (Live)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-marker cansat-location"></div>
+                        <span>Location Target</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-marker path-trail"></div>
+                        <span>Your Path</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="controls-panel">
+                <div class="panel-section">
+                    <h3 class="section-title">🛰️ Target Location</h3>
+                    <div class="input-group">
+                        <label for="cansatLat">Latitude (degrees)</label>
+                        <input type="number" id="cansatLat" step="0.000001" placeholder="eg:12.971645">
+                    </div>
+                    <div class="input-group">
+                        <label for="cansatLon">Longitude (degrees)</label>
+                        <input type="number" id="cansatLon" step="0.000001" placeholder="eg:77.594623">
+                    </div>
+                    <button class="btn secondary" id="setTarget">Set Target & Start Tracking</button>
+                    <div class="coordinates-display" id="cansatLocationDisplay" style="display: none;">
+                        <h4>CanSat Target Position</h4>
+                        <div class="coord-value">Lat: <span id="cansatLatDisplay">--</span></div>
+                        <div class="coord-value">Lon: <span id="cansatLonDisplay">--</span></div>
+                    </div>
+                </div>
+
+                <div class="panel-section">
+                    <h3 class="section-title">📍 Live Navigation</h3>
+                    <div class="distance-display" id="distanceDisplay" style="display: none;">
+                        <div class="distance-value" id="distanceValue">--</div>
+                        <div class="distance-label">meters to Loaction</div>
+                    </div>
+
+                    <div class="navigation-display" id="navigationDisplay" style="display: none;">
+                        <div class="direction-arrow" id="directionArrow">🧭</div>
+                        <div class="direction-text" id="directionText">Getting direction...</div>
+                    </div>
+
+                    <div class="arrival-display" id="arrivalDisplay" style="display: none;">
+                        <div class="arrival-icon">🎉</div>
+                        <div class="arrival-text">You've reached the Location!</div>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <div class="stat-value" id="speedValue">--</div>
+                            <div class="stat-label">Speed (km/h)</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="accuracyValue">--</div>
+                            <div class="stat-label">GPS Accuracy (m)</div>
+                        </div>
+                    </div>
+
+                    <button class="btn danger" id="stopTracking" style="display: none;">Stop Tracking</button>
+                </div>
+
+                <div class="panel-section">
+                    <h3 class="section-title">📊 Current Position</h3>
+                    <div class="coordinates-display" id="currentLocationDisplay" style="display: none;">
+                        <h4>Your Live Position</h4>
+                        <div class="coord-value">Lat: <span id="currentLat">--</span></div>
+                        <div class="coord-value">Lon: <span id="currentLon">--</span></div>
+                        <div class="coord-value">Updated: <span id="lastUpdate">Never</span></div>
+                    </div>
+                    <button class="btn" id="clearAll">Clear All & Reset</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="location.js"></script>
+</body>
+</html>
